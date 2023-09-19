@@ -16,6 +16,7 @@ strLevel1 = 'level_1'
 strMainMenu = 'main_menu'
 
 fontName = 'FixedSys.ttf'
+fontSize = 40
 
 
 colorWhite = (255, 255, 255)

@@ -1,6 +1,7 @@
 import os
 import pygame
 import random
+import consts
 
 
 def loadPhotos(path, accept=('.jpg', '.png', '.bmp', '.gif')):
@@ -34,3 +35,11 @@ def reSize(width: float, height: float, scale: float):
 
 def randomColor():
     return random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+
+
+def createLabel(str, fontSize = consts.fontSize, wScale=1.25, hScale=1, color = consts.colorWhite):
+    font = pygame.font.SysFont(consts.fontName, fontSize)
+    label = font.render(str, 1, color)
+    rect = label.get_rect()
+    label = pygame.transform.scale(label, (int(rect.width * wScale), int(rect.height * hScale)))
+    return label
