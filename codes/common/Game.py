@@ -1,9 +1,8 @@
 import pygame
-import random
+import sys
 
-import tools
 import consts
-import setup
+
 
 class Game:
 
@@ -13,6 +12,11 @@ class Game:
 
     def run(self, state):
         while True:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit();
+                    sys.exit()
 
             state.update(self.screen)
 

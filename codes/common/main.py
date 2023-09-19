@@ -1,6 +1,6 @@
-
 import Game
 from codes.states import MainMenu
+
 
 def main():
     game = Game.Game()
