@@ -1,6 +1,7 @@
 import pygame
 
 from codes.common import consts
+from codes.components import Coin
 
 pygame.font.init()
 
@@ -8,11 +9,14 @@ pygame.font.init()
 class Info:
     def __init__(self, state):
         self.state = state
+        self.infoLabels = []
+        self.stateLabels = []
+
         self.createStateLabels()
         self.createInfoLabels()
+        self.coin = Coin.Coin()
 
     def createStateLabels(self):
-        self.stateLabels = []
         if self.state == consts.strMainMenu:
             self.stateLabels.append((self.createLabel('1 PLAYER GAME'), (272, 360)))
             self.stateLabels.append((self.createLabel('2 PLAYER GAME'), (272, 405)))
@@ -20,7 +24,6 @@ class Info:
             self.stateLabels.append((self.createLabel('000000'), (400, 465)))
 
     def createInfoLabels(self):
-        self.infoLabels = []
         self.infoLabels.append((self.createLabel('MARIO'), (75, 30)))
         self.infoLabels.append((self.createLabel('WORLD'), (450, 30)))
         self.infoLabels.append((self.createLabel('TIME'), (625, 30)))
@@ -36,7 +39,7 @@ class Info:
         return labelImg
 
     def update(self):
-        pass
+        self.coin.update()
 
     def draw(self, surface: pygame.Surface):
         for label in self.stateLabels:
@@ -44,3 +47,5 @@ class Info:
 
         for label in self.infoLabels:
             surface.blit(label[0], label[1])
+
+        surface.blit(self.coin.image, self.coin.rect)
