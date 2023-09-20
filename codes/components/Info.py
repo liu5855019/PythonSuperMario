@@ -1,7 +1,7 @@
 import pygame
 
 from codes.common import consts
-from codes.components import Coin
+from codes.components import Coin, Fps
 
 pygame.font.init()
 
@@ -15,6 +15,8 @@ class Info:
         self.createStateLabels()
         self.createInfoLabels()
         self.coin = Coin.Coin()
+        self.fps = Fps.Fps()
+
 
     def createStateLabels(self):
         if self.state == consts.strMainMenu:
@@ -40,6 +42,7 @@ class Info:
 
     def update(self):
         self.coin.update()
+        self.fps.update()
 
     def draw(self, surface: pygame.Surface):
         for label in self.stateLabels:
@@ -49,3 +52,4 @@ class Info:
             surface.blit(label[0], label[1])
 
         surface.blit(self.coin.image, self.coin.rect)
+        self.fps.draw(surface)

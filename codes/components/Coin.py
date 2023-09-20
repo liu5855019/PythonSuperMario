@@ -26,7 +26,6 @@ class Coin(pygame.sprite.Sprite):
 
     def update(self) -> None:
         currentTime = pygame.time.get_ticks()
-        print(currentTime)
         frameIntervals = [375, 125, 125, 125]
 
         if self.timer == 0:
