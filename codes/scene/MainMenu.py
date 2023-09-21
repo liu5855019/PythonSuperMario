@@ -48,6 +48,7 @@ class MainMenu(BaseScene.BaseScene):
 
     def update(self, surface, keys):
         self.updateCursor(keys)
+        self.info.update(surface)
 
     def draw(self, surface):
         surface.blit(self.bg, surface.get_rect())
@@ -55,4 +56,4 @@ class MainMenu(BaseScene.BaseScene):
         surface.blit(self.player, (110, 490))
         surface.blit(self.cursor.image, self.cursor.rect)
 
-        self.info.update(surface)
+        self.info.draw(surface)

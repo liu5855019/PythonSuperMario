@@ -1,6 +1,6 @@
 import pygame
 
-from codes.common import consts
+from codes.common import consts, tools, setup
 from codes.components import Coin
 
 pygame.font.init()
@@ -23,6 +23,11 @@ class Info:
             self.stateLabels.append((self.createLabel('2 PLAYER GAME'), (272, 405)))
             self.stateLabels.append((self.createLabel('TOP - '), (290, 465)))
             self.stateLabels.append((self.createLabel('000000'), (400, 465)))
+        elif self.state == consts.strLoadScreen:
+            self.stateLabels.append((self.createLabel('WORLD'), (280, 200)))
+            self.stateLabels.append((self.createLabel('1 - 1'), (460, 200)))
+            self.stateLabels.append((self.createLabel('X   3'), (380, 280)))
+            self.playerImage = tools.getImage(setup.photos[consts.strMarioBros], 178,32,12, 16, consts.colorBlack, consts.bg_scale)
 
     def createInfoLabels(self):
         self.infoLabels.append((self.createLabel('MARIO'), (75, 30)))
@@ -41,7 +46,6 @@ class Info:
 
     def update(self, surface: pygame.Surface):
         self.coin.update()
-        self.draw(surface)
 
 
     def draw(self, surface: pygame.Surface):
@@ -52,3 +56,6 @@ class Info:
             surface.blit(label[0], label[1])
 
         surface.blit(self.coin.image, self.coin.rect)
+
+        if self.state == consts.strLoadScreen:
+            surface.blit(self.playerImage, (300, 270))

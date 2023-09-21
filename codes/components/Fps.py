@@ -25,5 +25,6 @@ class Fps(pygame.sprite.Sprite):
             self.image = tools.createLabel(strFps)
             self.rect = self.image.get_rect()
 
+    def draw(self, surface: pygame.Surface):
         surface.blit(self.image, self.rect)
 
