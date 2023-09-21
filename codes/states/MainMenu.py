@@ -11,6 +11,9 @@ class MainMenu:
         self.setup_player()
         self.setup_cursor()
         self.info = Info.Info(consts.strMainMenu)
+        self.done = False
+        self.next = consts.strLoadScreen
+        self.cursor.state = '1P'
 
     def setup_background(self):
         self.bg = setup.photos[consts.strLevel1]
@@ -34,10 +37,17 @@ class MainMenu:
         elif keys[pygame.K_DOWN]:
             self.cursor.state = '2p'
             self.cursor.rect.y = 405
+        elif keys[pygame.K_RETURN]:
+            if self.cursor.state == '1P':
+                self.done = True
+            elif self.cursor.state == '2P':
+                self.done = True
+
 
     def update(self, surface: pygame.Surface, keys):
         self.updateCursor(keys)
 
+    def draw(self, surface: pygame.Surface):
         surface.blit(self.bg, surface.get_rect())
         surface.blit(self.caption, (170, 100))
         surface.blit(self.player, (110, 490))
