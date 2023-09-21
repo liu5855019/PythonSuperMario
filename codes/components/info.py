@@ -1,7 +1,7 @@
 import pygame
 
 from codes.common import consts, tools, setup
-from codes.components import Coin
+from codes.components import coin
 
 pygame.font.init()
 
@@ -14,20 +14,20 @@ class Info:
 
         self.createStateLabels()
         self.createInfoLabels()
-        self.coin = Coin.Coin()
+        self.coin = coin.Coin()
 
 
     def createStateLabels(self):
-        if self.state == consts.strMainMenu:
+        if self.state == consts.str_main_menu:
             self.stateLabels.append((self.createLabel('1 PLAYER GAME'), (272, 360)))
             self.stateLabels.append((self.createLabel('2 PLAYER GAME'), (272, 405)))
             self.stateLabels.append((self.createLabel('TOP - '), (290, 465)))
             self.stateLabels.append((self.createLabel('000000'), (400, 465)))
-        elif self.state == consts.strLoadScreen:
+        elif self.state == consts.str_load_screen:
             self.stateLabels.append((self.createLabel('WORLD'), (280, 200)))
             self.stateLabels.append((self.createLabel('1 - 1'), (460, 200)))
             self.stateLabels.append((self.createLabel('X   3'), (380, 280)))
-            self.playerImage = tools.getImage(setup.photos[consts.strMarioBros], 178,32,12, 16, consts.colorBlack, consts.bg_scale)
+            self.playerImage = tools.getImage(setup.photos[consts.str_mario_bros], 178, 32, 12, 16, consts.color_black, consts.bg_scale)
 
     def createInfoLabels(self):
         self.infoLabels.append((self.createLabel('MARIO'), (75, 30)))
@@ -38,8 +38,8 @@ class Info:
         self.infoLabels.append((self.createLabel('1 - 1'), (480, 55)))
 
     def createLabel(self, label, fontSize=40, wScale=1.25, hScale=1):
-        font = pygame.font.SysFont(consts.fontName, fontSize)
-        labelImg = font.render(label, 1, consts.colorWhite)
+        font = pygame.font.SysFont(consts.font_name, fontSize)
+        labelImg = font.render(label, 1, consts.color_white)
         rect = labelImg.get_rect()
         labelImg = pygame.transform.scale(labelImg, (int(rect.width * wScale), int(rect.height * hScale)))
         return labelImg
@@ -57,5 +57,5 @@ class Info:
 
         surface.blit(self.coin.image, self.coin.rect)
 
-        if self.state == consts.strLoadScreen:
+        if self.state == consts.str_load_screen:
             surface.blit(self.playerImage, (300, 270))

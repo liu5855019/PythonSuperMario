@@ -20,7 +20,7 @@ class Coin(pygame.sprite.Sprite):
                        (9, 160, 5, 8),
                        (17, 160, 5, 8),
                        (9, 160, 5, 8)]
-        itemObjects = setup.photos[consts.strItemObjects]
+        itemObjects = setup.photos[consts.str_item_objects]
         for rect in frame_rects:
             self.frames.append(tools.getImage(itemObjects, *rect, (0, 0, 0), consts.bg_scale))
 

@@ -2,8 +2,8 @@ import pygame
 import sys
 
 import consts
-from codes.scene import BaseScene
-from codes.components import Fps
+from codes.scene import base_scene
+from codes.components import fps
 
 
 class Game:
@@ -13,8 +13,8 @@ class Game:
         self.clock = pygame.time.Clock()
         self.keys = pygame.key.get_pressed()
         self.sceneDict = sceneDict
-        self.scene: BaseScene.BaseScene = self.sceneDict[startScene]
-        self.fps = Fps.Fps()
+        self.scene: base_scene.BaseScene = self.sceneDict[startScene]
+        self.fps = fps.Fps()
 
     def run(self):
         while True:

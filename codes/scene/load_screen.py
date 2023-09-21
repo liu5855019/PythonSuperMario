@@ -1,17 +1,17 @@
 import pygame
 
-from codes.scene import BaseScene
+from codes.scene import base_scene
 from codes.common import consts
-from codes.components import Info
+from codes.components import info
 
 
-class LoadScreen(BaseScene.BaseScene):
+class LoadScreen(base_scene.BaseScene):
 
     def __init__(self):
-        BaseScene.BaseScene.__init__(self)
-        self.next = consts.strLevel1
+        base_scene.BaseScene.__init__(self)
+        self.next = consts.str_level1
         self.timer = 0
-        self.info = Info.Info(consts.strLoadScreen)
+        self.info = info.Info(consts.str_load_screen)
 
 
     def update(self, surface, keys):
@@ -23,6 +23,6 @@ class LoadScreen(BaseScene.BaseScene):
             self.timer = 0
 
     def draw(self, surface):
-        surface.fill(consts.colorBlack)
+        surface.fill(consts.color_black)
         self.info.draw(surface)
 

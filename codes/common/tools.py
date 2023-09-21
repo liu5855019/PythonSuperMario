@@ -37,8 +37,8 @@ def randomColor():
     return random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
 
 
-def createLabel(string, fontSize = consts.fontSize, wScale=1.25, hScale=1, color = consts.colorWhite):
-    font = pygame.font.SysFont(consts.fontName, fontSize)
+def createLabel(string, fontSize = consts.font_size, wScale=1.25, hScale=1, color = consts.color_white):
+    font = pygame.font.SysFont(consts.font_name, fontSize)
     label = font.render(str(string), 1, color)
     rect = label.get_rect()
     label = pygame.transform.scale(label, (int(rect.width * wScale), int(rect.height * hScale)))

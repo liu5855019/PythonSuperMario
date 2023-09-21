@@ -1,33 +1,33 @@
 import pygame
 
 from codes.common import tools, setup, consts
-from codes.components import Info
-from codes.scene import BaseScene
+from codes.components import info
+from codes.scene import base_scene
 
 
-class MainMenu(BaseScene.BaseScene):
+class MainMenu(base_scene.BaseScene):
     def __init__(self):
-        BaseScene.BaseScene.__init__(self)
+        base_scene.BaseScene.__init__(self)
         self.cursor = pygame.sprite.Sprite()
         self.setup_background()
         self.setup_player()
         self.setup_cursor()
-        self.info = Info.Info(consts.strMainMenu)
+        self.info = info.Info(consts.str_main_menu)
         self.done = False
-        self.next = consts.strLoadScreen
+        self.next = consts.str_load_screen
         self.cursor.state = '1P'
 
     def setup_background(self):
-        self.bg = setup.photos[consts.strLevel1]
+        self.bg = setup.photos[consts.str_level1]
         bgRect = self.bg.get_rect()
         self.bg = pygame.transform.scale(self.bg, tools.reSize(bgRect.width, bgRect.height, consts.bg_scale))
         self.caption = tools.getImage(setup.photos['title_screen'], 1, 60, 176, 88, (255, 0, 220), consts.bg_scale)
 
     def setup_player(self):
-        self.player = tools.getImage(setup.photos[consts.strMarioBros], 178, 32, 12, 16, (0, 0, 0), consts.player_scale)
+        self.player = tools.getImage(setup.photos[consts.str_mario_bros], 178, 32, 12, 16, (0, 0, 0), consts.player_scale)
 
     def setup_cursor(self):
-        self.cursor.image = tools.getImage(setup.photos[consts.strItemObjects], 24, 160, 8, 8, (0, 0, 0),
+        self.cursor.image = tools.getImage(setup.photos[consts.str_item_objects], 24, 160, 8, 8, (0, 0, 0),
                                            consts.player_scale)
         rect = self.cursor.image.get_rect()
         rect.x, rect.y = (200, 360)
