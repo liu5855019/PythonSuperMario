@@ -7,7 +7,9 @@ class Fps(pygame.sprite.Sprite):
         self.count = consts.game_fps_count
         self.timer = 0
         self.index = 0
-        self.img = tools.createLabel(consts.game_fps)
+        self.image = tools.createLabel(consts.game_fps)
+        self.rect = self.image.get_rect()
+
 
 
     def update(self, surface: pygame.Surface):
@@ -20,9 +22,11 @@ class Fps(pygame.sprite.Sprite):
             avg = float(interval) / self.count
             fps = 1000.0 / avg
             strFps = '%.2f'%fps
-            self.img = tools.createLabel(strFps)
+            self.image = tools.createLabel(strFps)
+            self.rect = self.image.get_rect()
+
 
         self.draw(surface)
 
     def draw(self, surface: pygame.Surface):
-        surface.blit(self.img, self.img.get_rect())
+        surface.blit(self.image, self.rect)
