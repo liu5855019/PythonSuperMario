@@ -1,7 +1,7 @@
 import pygame
 
 from codes.common import consts
-from codes.components import Coin, Fps
+from codes.components import Coin
 
 pygame.font.init()
 
@@ -15,7 +15,6 @@ class Info:
         self.createStateLabels()
         self.createInfoLabels()
         self.coin = Coin.Coin()
-        self.fps = Fps.Fps()
 
 
     def createStateLabels(self):
@@ -44,7 +43,6 @@ class Info:
         self.coin.update()
         self.draw(surface)
 
-        self.fps.update(surface)
 
     def draw(self, surface: pygame.Surface):
         for label in self.stateLabels:

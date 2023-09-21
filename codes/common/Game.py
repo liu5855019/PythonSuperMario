@@ -3,8 +3,7 @@ import sys
 
 import consts
 from codes.scene import BaseScene
-
-
+from codes.components import Fps
 
 
 class Game:
@@ -15,8 +14,7 @@ class Game:
         self.keys = pygame.key.get_pressed()
         self.sceneDict = sceneDict
         self.scene: BaseScene.BaseScene = self.sceneDict[startScene]
-
-
+        self.fps = Fps.Fps()
 
     def run(self):
         while True:
@@ -32,15 +30,14 @@ class Game:
 
             self.update()
 
-            # img = tools.getImage(setup.photos['mario_bros'], 145, 32, 16, 16, (0,0,0), random.randint(1, 5))
-            # self.screen.blit(img, (300, 300))
+            self.fps.update(self.screen)
 
             pygame.display.update()
             self.clock.tick(consts.game_fps)
         return
 
     def update(self):
-        if self.scene.done == True:
+        if self.scene.done:
             self.scene.done = False
             self.scene = self.sceneDict[self.scene.next]
 

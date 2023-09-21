@@ -11,5 +11,5 @@ class Level(BaseScene.BaseScene):
         pass
 
     def draw(self, surface):
-        surface.fill(consts.colorWhite)
+        surface.fill(consts.colorGreen)
 
