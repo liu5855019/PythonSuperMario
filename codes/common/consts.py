@@ -28,5 +28,7 @@ color_red = (255, 0, 0)
 color_green = (0, 255, 0)
 color_blue = (0, 0, 255)
 
+
+
 if __name__ == '__main__':
     print(screen_w, screen_h)
