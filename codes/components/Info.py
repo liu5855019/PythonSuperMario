@@ -40,9 +40,11 @@ class Info:
         labelImg = pygame.transform.scale(labelImg, (int(rect.width * wScale), int(rect.height * hScale)))
         return labelImg
 
-    def update(self):
+    def update(self, surface: pygame.Surface):
         self.coin.update()
-        self.fps.update()
+        self.draw(surface)
+
+        self.fps.update(surface)
 
     def draw(self, surface: pygame.Surface):
         for label in self.stateLabels:
@@ -52,4 +54,3 @@ class Info:
             surface.blit(label[0], label[1])
 
         surface.blit(self.coin.image, self.coin.rect)
-        self.fps.draw(surface)

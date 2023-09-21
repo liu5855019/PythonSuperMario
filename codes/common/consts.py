@@ -1,7 +1,8 @@
 screen_w = 800
 screen_h = 600
 
-game_fps = 60
+game_fps = 1000
+game_fps_count = 500
 
 bg_scale = 2.679
 player_scale = 2.9

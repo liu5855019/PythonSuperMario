@@ -30,5 +30,4 @@ class MainMenu():
         surface.blit(self.player, (110, 490))
         surface.blit(self.cursor, (220,360))
 
-        self.info.update()
-        self.info.draw(surface)
+        self.info.update(surface)
