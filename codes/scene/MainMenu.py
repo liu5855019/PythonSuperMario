@@ -2,10 +2,12 @@ import pygame
 
 from codes.common import tools, setup, consts
 from codes.components import Info
+from codes.scene import BaseScene
 
 
-class MainMenu:
+class MainMenu(BaseScene.BaseScene):
     def __init__(self):
+        BaseScene.BaseScene.__init__(self)
         self.cursor = pygame.sprite.Sprite()
         self.setup_background()
         self.setup_player()
@@ -18,14 +20,15 @@ class MainMenu:
     def setup_background(self):
         self.bg = setup.photos[consts.strLevel1]
         bgRect = self.bg.get_rect()
-        self.bg = pygame.transform.scale(self.bg, tools.reSize(bgRect.width, bgRect.height, consts.bg_scale) )
-        self.caption = tools.getImage(setup.photos['title_screen'], 1, 60, 176, 88, (255,0,220), consts.bg_scale)
+        self.bg = pygame.transform.scale(self.bg, tools.reSize(bgRect.width, bgRect.height, consts.bg_scale))
+        self.caption = tools.getImage(setup.photos['title_screen'], 1, 60, 176, 88, (255, 0, 220), consts.bg_scale)
 
     def setup_player(self):
-        self.player = tools.getImage(setup.photos[consts.strMarioBros], 178,32, 12, 16, (0,0,0), consts.player_scale)
+        self.player = tools.getImage(setup.photos[consts.strMarioBros], 178, 32, 12, 16, (0, 0, 0), consts.player_scale)
 
     def setup_cursor(self):
-        self.cursor.image = tools.getImage(setup.photos[consts.strItemObjects], 24, 160, 8, 8, (0,0,0), consts.player_scale)
+        self.cursor.image = tools.getImage(setup.photos[consts.strItemObjects], 24, 160, 8, 8, (0, 0, 0),
+                                           consts.player_scale)
         rect = self.cursor.image.get_rect()
         rect.x, rect.y = (200, 360)
         self.cursor.rect = rect
@@ -43,11 +46,10 @@ class MainMenu:
             elif self.cursor.state == '2P':
                 self.done = True
 
-
-    def update(self, surface: pygame.Surface, keys):
+    def update(self, surface, keys):
         self.updateCursor(keys)
 
-    def draw(self, surface: pygame.Surface):
+    def draw(self, surface):
         surface.blit(self.bg, surface.get_rect())
         surface.blit(self.caption, (170, 100))
         surface.blit(self.player, (110, 490))

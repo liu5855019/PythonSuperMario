@@ -1,16 +1,15 @@
-import pygame
-
+from codes.scene import BaseScene
 from codes.common import consts
 
 
-class LoadScreen:
+class Level(BaseScene.BaseScene):
     def __init__(self):
-        self.done = False
+        BaseScene.BaseScene.__init__(self)
         self.next = consts.strLevel1
 
     def update(self, surface, keys):
         pass
 
     def draw(self, surface):
-        surface.fill(consts.colorBlue)
+        surface.fill(consts.colorWhite)
 

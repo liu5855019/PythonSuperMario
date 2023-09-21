@@ -2,6 +2,7 @@ import pygame
 import sys
 
 import consts
+from codes.scene import BaseScene
 
 
 
@@ -13,7 +14,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.keys = pygame.key.get_pressed()
         self.sceneDict = sceneDict
-        self.scene = self.sceneDict[startScene]
+        self.scene: BaseScene.BaseScene = self.sceneDict[startScene]
 
 
 

@@ -1,5 +1,5 @@
 
-from codes.states import MainMenu, LoadScreen, Level
+from codes.scene import MainMenu, LoadScreen, Level
 from codes.common import Game, consts
 
 
