@@ -10,7 +10,7 @@ def main():
         consts.str_level1: level.Level()
     }
 
-    cgame = game.Game(sceneDict, consts.str_load_screen)
+    cgame = game.Game(sceneDict, consts.str_level1)
     cgame.run()
 
 

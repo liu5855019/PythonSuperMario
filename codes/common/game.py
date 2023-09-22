@@ -31,6 +31,7 @@ class Game:
             self.update()
 
             self.fps.update(self.screen)
+            self.fps.draw(self.screen)
 
             pygame.display.update()
             self.clock.tick(consts.game_fps)

@@ -1,5 +1,6 @@
-import  pygame
+import pygame
 
+from codes.common import setup, consts, tools
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, name):
@@ -23,13 +24,26 @@ class Player(pygame.sprite.Sprite):
         self.velocity_y = 0
 
     def setup_timers(self):
-        pass
+        self.timer_walk = 0  ### 步行时间
+        self.time_transition = 0
+
 
     def load_images(self):
-        pass
+        sheet = setup.photos[consts.str_mario_bros]
+        self.frames = []
+        self.frames.append(tools.getImage(sheet, 178, 32, 12, 16, consts.color_black, consts.player_scale))
+
+        self.frame_index = 0;
+        self.image = self.frames[self.frame_index]
+        self.rect = self.image.get_rect()
 
     def update(self, surface: pygame.Surface, keys):
-        pass
+        if keys[pygame.K_RIGHT]:
+            self.velocity_x = 5
+        elif keys[pygame.K_LEFT]:
+            self.velocity_x = -5
+        else:
+            self.velocity_x = 0
 
-    def draw(self, surface: pygame.Surface,):
-        pass
+    def draw(self, surface: pygame.Surface):
+        surface.blit(self.image, self.rect)
