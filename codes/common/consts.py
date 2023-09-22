@@ -1,8 +1,8 @@
 screen_w = 800
 screen_h = 600
 
-game_fps = 1000
-game_fps_count = 500
+game_fps = 60
+game_fps_update_interval = 500
 
 bg_scale = 2.679
 player_scale = 2.9
@@ -10,6 +10,7 @@ player_scale = 2.9
 
 path_graphics = '../../resources/graphics'
 
+str_mario = 'mario'
 str_mario_bros = 'mario_bros'
 str_title_screen = 'title_screen'
 str_item_objects = 'item_objects'
