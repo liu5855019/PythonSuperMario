@@ -9,6 +9,7 @@ player_scale = 2.9
 
 
 path_graphics = '../../resources/graphics'
+path_mario = '../../resources/data/player/mario.json'
 
 str_mario = 'mario'
 str_mario_bros = 'mario_bros'

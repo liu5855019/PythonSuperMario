@@ -1,4 +1,5 @@
 import pygame
+import json
 
 from codes.common import setup, consts, tools
 
@@ -6,10 +7,17 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, name):
         pygame.sprite.Sprite.__init__(self)
         self.name = name
+        self.load_datas()
         self.setup_states()
         self.setup_timers()
         self.setup_velocities()
         self.load_images()
+
+    def load_datas(self):
+        with open(consts.path_mario) as file:
+            self.data = json.load(file)
+
+        print(type(self.data))
 
     def setup_states(self):
         self.face_right = True
