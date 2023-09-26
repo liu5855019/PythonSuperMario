@@ -15,9 +15,8 @@ class Player(pygame.sprite.Sprite):
 
     def load_datas(self):
         with open(consts.path_mario) as file:
-            self.data = json.load(file)
+            self.datas = json.load(file)
 
-        print(type(self.data))
 
     def setup_states(self):
         self.face_right = True
@@ -37,13 +36,46 @@ class Player(pygame.sprite.Sprite):
 
 
     def load_images(self):
-        sheet = setup.photos[consts.str_mario_bros]
-        self.frames = []
-        self.frames.append(tools.getImage(sheet, 178, 32, 12, 16, consts.color_black, consts.player_scale))
+        # self.frames = []
+        # self.frames.append(tools.getImage(sheet, 178, 32, 12, 16, consts.color_black, consts.player_scale))
 
-        self.frame_index = 0;
+        self.right_small_frames = []
+        self.right_big_frames = []
+        self.right_fire_frames = []
+        self.left_small_frames = []
+        self.left_big_frames = []
+        self.left_fire_frames = []
+
+        self.small_frames = [self.right_small_frames, self.left_small_frames]
+        self.big_frames = [self.right_big_frames, self.left_big_frames]
+        self.fire_frames = [self.right_fire_frames, self.left_fire_frames]
+
+
+        self.right_frames = self.right_small_frames
+        self.left_frames = self.left_small_frames
+
+        sheet = setup.photos[consts.str_mario_bros]
+        frame_rect_dict:dict = self.datas[consts.str_image_frames]
+        for key, rects in frame_rect_dict.items():
+            for rect in rects:
+                right_image = tools.getImage(sheet,
+                                             rect["x"],
+                                             rect["y"],
+                                             rect["width"],
+                                             rect["height"],
+                                             consts.color_black,
+                                             consts.player_scale)
+                left_image = pygame.transform.flip(right_image, True, False)
+
+
+
+
+        self.right_frames.append(tools.getImage(sheet, 178, 32, 12, 16, consts.color_black, consts.player_scale))
+        self.frame_index = 0
+        self.frames = self.right_frames
         self.image = self.frames[self.frame_index]
         self.rect = self.image.get_rect()
+
 
     def update(self, surface: pygame.Surface, keys):
         if keys[pygame.K_RIGHT]:

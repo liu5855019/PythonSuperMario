@@ -19,6 +19,12 @@ str_level = 'level'
 str_level1 = 'level_1'
 str_main_menu = 'main_menu'
 str_load_screen = 'load_screen'
+str_image_frames = 'image_frames'
+str_right_small_normal = "right_small_normal"
+str_right_big_normal = "right_big_normal"
+str_right_big_fire = "right_big_fire"
+
+
 
 font_name = 'FixedSys.ttf'
 font_size = 40
