@@ -23,11 +23,11 @@ class Level(base_scene.BaseScene):
     def setup_player(self):
         self.player = player.Player(consts.str_mario)
         self.player.rect.x = 300
-        self.player.rect.y = 300
+        self.player.rect.y = 490
 
     def update_player_position(self):
-        self.player.rect.x += self.player.velocity_x
-        self.player.rect.y += self.player.velocity_y
+        self.player.rect.x += self.player.speed_x
+        self.player.rect.y += self.player.speed_y
 
     def update(self, surface, keys):
         self.info.update(surface)

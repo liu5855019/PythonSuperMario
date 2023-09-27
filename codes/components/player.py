@@ -7,8 +7,9 @@ from codes.common import setup, consts, tools
 
 
 class player_state(enum.Enum):
-    walk=1
-    jump=2
+    stand = 1
+    walk = 2
+    jump = 3
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, name):
@@ -17,7 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.load_datas()
         self.setup_states()
         self.setup_timers()
-        self.setup_velocities()
+        self.setup_speeds()
         self.load_images()
 
     def load_datas(self):
@@ -28,15 +29,28 @@ class Player(pygame.sprite.Sprite):
         self.face_right = True
         self.dead = False
         self.big = False
-        self.state = player_state.walk
+        self.state: player_state = player_state.stand
 
 
-    def setup_velocities(self):
+    def setup_speeds(self):
         ###
         # 设置速度相关
         ###
-        self.velocity_x = 0
-        self.velocity_y = 0
+        self.speed_x = 0
+        self.speed_y = 0
+
+        speed = self.datas["speed"]
+        self.speed_max_walk = speed["max_walk_speed"]
+        self.speed_max_ran = speed["max_run_speed"]
+        self.speed_max_y = speed["max_y_velocity"]
+        self.walk_accel = speed["walk_accel"]
+        self.run_accel = speed["run_accel"]
+        self.turn_accel = speed["turn_accel"]
+        self.speed_jump = speed["jump_velocity"]
+        self.gravity = consts.game_gravity
+
+        self.speed_max_x = self.speed_max_walk
+        self.accel_x = self.walk_accel
 
     def setup_timers(self):
         self.timer_walk = 0  ### 步行时间
@@ -88,31 +102,87 @@ class Player(pygame.sprite.Sprite):
         self.image = self.frames[self.frame_index]
         self.rect = self.image.get_rect()
 
+
     def update(self, surface: pygame.Surface, keys):
-        current_time = pygame.time.get_ticks()
-        if keys[pygame.K_RIGHT]:
-            self.velocity_x = 5
-            self.velocity_y = 0
-            self.state = player_state.walk
-        elif keys[pygame.K_LEFT]:
-            self.velocity_x = -5
-            self.velocity_y = 0
-            self.state = player_state.walk
-        elif keys[pygame.K_SPACE]:
-            self.velocity_x = 0
-            self.velocity_y = -5
-            self.state = player_state.jump
+        self.current_time = pygame.time.get_ticks()
 
-        if self.state == player_state.walk:
-            if current_time - self.timer_walk > 100:
-                self.timer_walk = current_time
-                self.frame_index += 1
-                self.frame_index %= 4
+        self.handle_states(keys)
 
-        if self.state == player_state.jump:
-            self.frame_index = 4
-
-        self.image = self.frames[self.frame_index]
 
     def draw(self, surface: pygame.Surface):
         surface.blit(self.image, self.rect)
+
+
+
+    def handle_states(self, keys):
+        if self.state == player_state.stand:
+            self.stand(keys)
+        elif self.state == player_state.walk:
+            self.walk(keys)
+        elif self.state == player_state.jump:
+            self.jump(keys)
+
+        if self.face_right:
+            self.image = self.right_frames[self.frame_index]
+        else:
+            self.image = self.left_frames[self.frame_index]
+
+
+    def stand(self, keys):
+        self.frame_index = 0
+        self.speed_x = 0
+        self.speed_y = 0
+        if keys[pygame.K_RIGHT]:
+            self.face_right = True
+            self.state = player_state.walk
+        elif keys[pygame.K_LEFT]:
+            self.face_right = False
+            self.state = player_state.walk
+
+
+
+
+    def walk(self, keys):
+        self.speed_max_x = self.speed_max_walk
+        self.accel_x = self.walk_accel
+        if self.current_time - self.timer_walk > 100:
+            self.timer_walk = self.current_time
+            if self.frame_index < 3:
+                self.frame_index += 1
+            else:
+                self.frame_index = 1
+        if keys[pygame.K_RIGHT]:
+            self.face_right = True
+            if self.speed_x <0:
+                self.frame_index = 5
+                self.accel_x = self.turn_accel
+            self.speed_x = self.count_speed(self.speed_x, self.accel_x, self.speed_max_x, self.face_right)
+        elif keys[pygame.K_LEFT]:
+            self.face_right = False
+            if self.speed_x > 0:
+                self.frame_index = 5
+                self.accel_x = self.turn_accel
+            self.speed_x = self.count_speed(self.speed_x, self.accel_x, self.speed_max_x, self.face_right)
+        else:
+            if self.speed_x > 0:
+                self.speed_x -= self.accel_x
+                if self.speed_x < 0:
+                    self.speed_x = 0
+                    self.state = player_state.stand
+            elif self.speed_x < 0:
+                self.speed_x += self.accel_x
+                if self.speed_x > 0:
+                    self.speed_x = 0
+                    self.state = player_state.stand
+            else:
+                self.state = player_state.stand
+
+
+    def jump(self, keys):
+        pass
+
+    def count_speed(self, speed, accel, speed_max, is_right = True):
+        if is_right:
+            return min(speed + accel, speed_max)
+        else:
+            return max(speed - accel, -speed_max)

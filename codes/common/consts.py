@@ -3,6 +3,7 @@ screen_h = 600
 
 game_fps = 60
 game_fps_update_interval = 500
+game_gravity = 1.0
 
 bg_scale = 2.679
 player_scale = 2.9

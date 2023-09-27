@@ -8,7 +8,6 @@ def loadPhotos(path, accept=('.jpg', '.png', '.bmp', '.gif')):
     photos = {}
     files = os.listdir(path)
     for file in files:
-        print(file)
         name, ext = os.path.splitext(file)
         if ext.lower() in accept:
             img = pygame.image.load(os.path.join(path, file))
