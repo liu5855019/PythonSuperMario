@@ -27,6 +27,7 @@ class Level(base_scene.BaseScene):
 
     def update_player_position(self):
         self.player.rect.x += self.player.velocity_x
+        self.player.rect.y += self.player.velocity_y
 
     def update(self, surface, keys):
         self.info.update(surface)
