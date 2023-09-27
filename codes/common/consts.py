@@ -5,12 +5,13 @@ game_fps = 60
 game_fps_update_interval = 500
 game_gravity = 1.0
 
-bg_scale = 2.679
+bg_scale = 2.680
 player_scale = 2.9
 
 
 path_graphics = '../../resources/graphics'
 path_mario = '../../resources/data/player/mario.json'
+path_level1 = '../../resources/data/maps/level_1.json'
 
 str_mario = 'mario'
 str_mario_bros = 'mario_bros'
